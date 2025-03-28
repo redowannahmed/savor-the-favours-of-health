@@ -1,12 +1,12 @@
 package feature.aiQuery;
 import java.util.Scanner;
 
-import UI.FeatureUI;
+import UI.iFeatureUI;
 
-public class AIHealthQueryUI implements FeatureUI{
-    private final AIHealthQueryService aiService;
+public class AIHealthQueryUI implements iFeatureUI{
+    private final iAIHealthQuery aiService;
 
-    public AIHealthQueryUI (AIHealthQueryService aiService)
+    public AIHealthQueryUI (iAIHealthQuery aiService)
     {
         this.aiService = aiService;
     }
@@ -60,7 +60,7 @@ public class AIHealthQueryUI implements FeatureUI{
         System.out.println("Fetching response from AI...");
         String aiResponse = aiService.getAIResponse(userQuery);
 
-        System.out.println("\n\u001B[36m" + aiResponse + "\u001B[0m"); // print in cyan
+        System.out.println("\n\u001B[36m" + aiResponse + "\u001B[0m"); 
     }
 
     private void clearScreen() {

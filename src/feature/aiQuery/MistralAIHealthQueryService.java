@@ -7,7 +7,7 @@ import java.util.Scanner;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class MistralAIHealthQueryService implements AIHealthQueryService{
+public class MistralAIHealthQueryService implements iAIHealthQuery{
     private final String apiKey;
     private final String baseUrl;
 

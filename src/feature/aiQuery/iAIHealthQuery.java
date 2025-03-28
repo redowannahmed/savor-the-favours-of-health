@@ -1,5 +1,5 @@
 package feature.aiQuery;
 
-public interface AIHealthQueryService {
+public interface iAIHealthQuery {
     String getAIResponse (String query);
 }

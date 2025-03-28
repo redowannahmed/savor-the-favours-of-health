@@ -2,12 +2,12 @@ package controller;
 import java.util.List;
 import java.util.Scanner;
 
-import UI.FeatureUI;
+import UI.iFeatureUI;
 
 public class AppController {
-    private final List<FeatureUI> features;
+    private final List<iFeatureUI> features;
 
-    public AppController(List<FeatureUI> features) {
+    public AppController(List<iFeatureUI> features) {
         this.features = features;
     }
 
@@ -44,6 +44,8 @@ public class AppController {
         }
 
         System.out.println("Exiting application...");
+
+        sc.close();
     }
 
     private void clearScreen() {

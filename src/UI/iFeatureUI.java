@@ -1,5 +1,5 @@
 package UI;
-public interface FeatureUI {
+public interface iFeatureUI {
     String getTitle ();
 
     void run();
