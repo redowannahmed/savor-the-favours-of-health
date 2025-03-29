@@ -1,9 +1,6 @@
 package feature.sleep;
-
-import java.time.LocalDate;
+import java.util.List;
 
 public interface iSleepAnalyzer {
-    void recordSleepData(LocalDate date, int hoursSlept, String notes);
-
-    SleepReport analyzeSleepData (LocalDate start, LocalDate end);
+    SleepAnalysisResult analyzeSleepTrend(List<SleepSession> sessions);
 }
