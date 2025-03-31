@@ -12,30 +12,30 @@ public class GoalServiceImpl implements iGoalService {
     }
 
     @Override
-    public void addGoal(String description) {
-        int newId = generateUniqueGoalId();
-        DailyGoal goal = new DailyGoal(newId, description, LocalDate.now(), new PendingGoalStatus());
+    public void addGoal(String description) throws IllegalArgumentException {
+        // Validate that the description is not blank.
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Goal description cannot be blank.");
+        }
+        DailyGoal goal = new DailyGoal(description.trim(), LocalDate.now(), new PendingGoalStatus());
         goalRepository.addGoal(goal);
     }
 
     @Override
-    public void changeGoalStatus(int goalId, GoalStatus newStatus) {
-        List<DailyGoal> goals = goalRepository.getGoalsForDate(LocalDate.now());
-        for (DailyGoal g : goals) {
-            if (g.getId() == goalId) {
-                g.setStatus(newStatus);
-                goalRepository.updateGoal(g);
-                break;
-            }
+    public void changeGoalStatus(int goalNumber, GoalStatus newStatus) {
+        List<DailyGoal> todayGoals = goalRepository.getGoalsForDate(LocalDate.now());
+        if (goalNumber < 0 || goalNumber >= todayGoals.size()) {
+            System.out.println("Invalid goal number.");
+            return;
         }
+        DailyGoal goal = todayGoals.get(goalNumber);
+        // Create a new DailyGoal with updated status (preserving description and date).
+        DailyGoal updatedGoal = new DailyGoal(goal.getDescription(), goal.getDate(), newStatus);
+        goalRepository.updateTodayGoalAtIndex(goalNumber, updatedGoal);
     }
 
     @Override
     public List<DailyGoal> getTodayGoals() {
         return goalRepository.getGoalsForDate(LocalDate.now());
-    }
-
-    private int generateUniqueGoalId() {
-        return (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
     }
 }

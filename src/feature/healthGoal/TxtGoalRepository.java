@@ -34,9 +34,10 @@ public class TxtGoalRepository implements iGoalRepository{
     @Override
     public void addGoal(DailyGoal goal) {
         List<DailyGoal> goals = getAllGoals();
-        // Prevent duplicate goal (same description for the same date)
+        // Prevent duplicate goal (same description for the same date, ignoring whitespace).
         for (DailyGoal g : goals) {
-            if (g.getDate().equals(goal.getDate()) && g.getDescription().equalsIgnoreCase(goal.getDescription())) {
+            if (g.getDate().equals(goal.getDate()) &&
+                g.getDescription().trim().equalsIgnoreCase(goal.getDescription().trim())) {
                 System.out.println("A goal with that description already exists for today.");
                 return;
             }
@@ -46,15 +47,23 @@ public class TxtGoalRepository implements iGoalRepository{
     }
 
     @Override
-    public void updateGoal(DailyGoal goal) {
-        List<DailyGoal> goals = getAllGoals();
-        for (int i = 0; i < goals.size(); i++) {
-            if (goals.get(i).getId() == goal.getId()) {
-                goals.set(i, goal);
-                break;
+    public void updateTodayGoalAtIndex(int index, DailyGoal updatedGoal) {
+        // Load all goals, update the specific goal among today's goals.
+        List<DailyGoal> allGoals = getAllGoals();
+        List<Integer> todayIndices = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        for (int i = 0; i < allGoals.size(); i++) {
+            if (allGoals.get(i).getDate().equals(today)) {
+                todayIndices.add(i);
             }
         }
-        writeAllGoals(goals);
+        if (index < 0 || index >= todayIndices.size()) {
+            System.out.println("Invalid goal number.");
+            return;
+        }
+        int realIndex = todayIndices.get(index);
+        allGoals.set(realIndex, updatedGoal);
+        writeAllGoals(allGoals);
     }
 
     @Override
