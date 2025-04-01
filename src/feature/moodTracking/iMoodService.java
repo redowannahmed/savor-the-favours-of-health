@@ -7,4 +7,5 @@ public interface iMoodService {
     void logMoodEntry(MoodEntry entry);
     MoodSummary analyzeMoodEntries(List<MoodEntry> entries);
     List<MoodEntry> getEntriesSince(LocalDate startDate);
+    List<MoodEntry> getEntriesForDate(LocalDate date);
 }

@@ -1,9 +1,10 @@
-package feature.moodTracking.moodTrackUI;
+package feature.moodTracking;
 
-import feature.moodTracking.MoodTrackerController;
-import feature.moodTracking.MoodSummary; 
+import UI.InputProcessor;
+import UI.iCommand;
+import UI.TableRenderer;
 
-public class ViewSummaryCommand implements Command {
+public class ViewSummaryCommand implements iCommand{
     private final MoodTrackerController controller;
     private final TableRenderer tableRenderer;
     private final InputProcessor inputProcessor;

@@ -1,9 +1,9 @@
-package feature.moodTracking.moodTrackUI;
+package UI;
 
 import java.util.Scanner;
 
 public class InputProcessor {
-    private final Scanner scanner;
+        private final Scanner scanner;
 
     public InputProcessor() {
         scanner = new Scanner(System.in);
@@ -20,16 +20,16 @@ public class InputProcessor {
                 String input = readLine(prompt);
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                print("Invalid number. Please try again.");
+                System.out.println("Invalid number. Please try again.");
             }
         }
     }
 
-    public void print(String message) {
-        System.out.println(message);
-    }
-
     public void pause() {
         readLine("Press Enter to continue...");
+    }
+
+    public void print(String message) {
+        System.out.println(message);
     }
 }

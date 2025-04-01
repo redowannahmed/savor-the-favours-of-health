@@ -1,12 +1,9 @@
-package feature.moodTracking.moodTrackUI;
+package feature.moodTracking;
 
-import feature.moodTracking.AngryMood;
-import feature.moodTracking.HappyMood;
-import feature.moodTracking.Mood;
-import feature.moodTracking.MoodTrackerController;
-import feature.moodTracking.SadMood;
+import UI.InputProcessor;
+import UI.iCommand;
 
-public class LogMoodCommand implements Command{
+public class LogMoodCommand implements iCommand{
         private final MoodTrackerController controller;
     private final InputProcessor inputProcessor;
     

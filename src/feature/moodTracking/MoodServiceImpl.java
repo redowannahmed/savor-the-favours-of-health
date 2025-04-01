@@ -23,6 +23,11 @@ public class MoodServiceImpl implements iMoodService{
     }
 
     @Override
+    public List<MoodEntry> getEntriesForDate(LocalDate date) {
+        return moodRepository.getEntriesForDate(date);
+    }
+
+    @Override
     public MoodSummary analyzeMoodEntries(List<MoodEntry> entries) {
         if (entries == null || entries.isEmpty()) {
             return new MoodSummary(new HashMap<>(), 0, "N/A");

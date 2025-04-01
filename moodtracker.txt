@@ -1,1 +1,5 @@
-2025-04-01 | 4 | Happy | i felt so happy today
+2025-03-31 | 4 | Happy | i felt so happy today
+2025-04-01 | 2 | Sad | i feel like killing you
+2025-04-01 | 4 | angry | i killed a man
+2025-04-02 | 2 | Sad | 
+2025-04-02 | 5 | Happy | barca won!

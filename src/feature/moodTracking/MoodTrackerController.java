@@ -15,6 +15,10 @@ public class MoodTrackerController {
         moodService.logMoodEntry(entry);
     }
 
+    public List<MoodEntry> getMoodEntriesForDate(LocalDate date) {
+        return moodService.getEntriesForDate(date);
+    }
+
     public MoodSummary getMoodSummary() {
         LocalDate fourWeeksAgo = LocalDate.now().minusWeeks(4);
         List<MoodEntry> entries = moodService.getEntriesSince(fourWeeksAgo);
