@@ -6,17 +6,14 @@ import java.util.List;
 
 import UI.InputProcessor;
 import UI.iCommand;
-import UI.TableRenderer;
 
 public class ViewDayMoodCommand implements iCommand{
     private final MoodTrackerController controller;
     private final InputProcessor inputProcessor;
-    private final TableRenderer tableRenderer;
 
-    public ViewDayMoodCommand(MoodTrackerController controller, InputProcessor inputProcessor, TableRenderer tableRenderer) {
+    public ViewDayMoodCommand(MoodTrackerController controller, InputProcessor inputProcessor) {
         this.controller = controller;
         this.inputProcessor = inputProcessor;
-        this.tableRenderer = tableRenderer;
     }
 
     @Override

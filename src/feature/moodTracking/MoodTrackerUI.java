@@ -23,8 +23,8 @@ public class MoodTrackerUI extends AbstractFeatureUI{
     private void registerCommands() {
         // The shared inputProcessor and tableRenderer come from AbstractFeatureUI.
         commandRegistry.put("1", new LogMoodCommand(controller, inputProcessor));
-        commandRegistry.put("2", new ViewSummaryCommand(controller, tableRenderer, inputProcessor));
-        commandRegistry.put("3", new ViewDayMoodCommand(controller, inputProcessor, tableRenderer));
+        commandRegistry.put("2", new ViewSummaryCommand(controller, inputProcessor));
+        commandRegistry.put("3", new ViewDayMoodCommand(controller, inputProcessor));
     }
     
     @Override

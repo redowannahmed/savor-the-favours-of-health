@@ -2,16 +2,13 @@ package feature.moodTracking;
 
 import UI.InputProcessor;
 import UI.iCommand;
-import UI.TableRenderer;
 
 public class ViewSummaryCommand implements iCommand{
     private final MoodTrackerController controller;
-    private final TableRenderer tableRenderer;
     private final InputProcessor inputProcessor;
 
-    public ViewSummaryCommand(MoodTrackerController controller, TableRenderer tableRenderer, InputProcessor inputProcessor) {
+    public ViewSummaryCommand(MoodTrackerController controller, InputProcessor inputProcessor) {
         this.controller = controller;
-        this.tableRenderer = tableRenderer;
         this.inputProcessor = inputProcessor;
     }
 
@@ -25,7 +22,7 @@ public class ViewSummaryCommand implements iCommand{
             inputProcessor.print("Average Rating: " + String.format("%.2f", summary.getAverageRating()));
             inputProcessor.print("Most Frequent Mood: " + summary.getMostFrequentMood());
             inputProcessor.print("Mood Counts:");
-            tableRenderer.renderSummaryTable(summary.getMoodCounts());
+            MoodTrackingTableRenderer.renderSummaryTable(summary.getMoodCounts());
         }
         inputProcessor.pause();
     }

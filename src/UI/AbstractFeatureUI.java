@@ -2,11 +2,9 @@ package UI;
 
 public abstract class AbstractFeatureUI implements iFeatureUI{
     protected final InputProcessor inputProcessor;
-    protected final TableRenderer tableRenderer;
     
     public AbstractFeatureUI() {
         this.inputProcessor = new InputProcessor();
-        this.tableRenderer = new TableRenderer();
     }
     
     /**
