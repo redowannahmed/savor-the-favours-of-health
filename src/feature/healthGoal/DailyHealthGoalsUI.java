@@ -1,132 +1,72 @@
 package feature.healthGoal;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import UI.iCommand;
 import UI.iFeatureUI;
 import utils.iDataReader;
 import utils.iDataWriter;
 import utils.txtDataReader;
 import utils.txtDataWriter;
+import UI.AbstractFeatureUI;
 
-public class DailyHealthGoalsUI implements iFeatureUI{
+public class DailyHealthGoalsUI extends AbstractFeatureUI{
     private final DailyHealthGoalsController controller;
-    private final InputHandler inputHandler;
-    private final TableRenderer tableRenderer;
+    private final Map<String, iCommand> commandRegistry;
 
     public DailyHealthGoalsUI(DailyHealthGoalsController controller) {
         this.controller = controller;
-        this.inputHandler = new InputHandler();
-        this.tableRenderer = new TableRenderer();
+        this.commandRegistry = new HashMap<>();
+        registerCommands();
     }
-
+    
+    private void registerCommands() {
+        commandRegistry.put("1", new AddGoalCommand(controller, inputProcessor));
+        commandRegistry.put("2", new ChangeGoalStatusCommand(controller, inputProcessor));
+        commandRegistry.put("3", new ViewGoalsCommand(controller, inputProcessor));
+    }
+    
     @Override
     public String getTitle() {
         return "Daily Health Goals";
     }
-
+    
     @Override
     public void run() {
         boolean exit = false;
         while (!exit) {
             clearScreen();
-            System.out.println("=== Daily Health Goals ===");
-            System.out.println("1. Add a Goal");
-            System.out.println("2. Change Goal Status");
-            System.out.println("3. View Today's Goals");
-            System.out.println("0. Return to Main Menu");
-            String choice = inputHandler.readLine("Enter your choice: ");
-
-            switch (choice) {
-                case "1":
-                    handleAddGoal();
-                    break;
-                case "2":
-                    handleChangeGoalStatus();
-                    break;
-                case "3":
-                    handleViewGoals();
-                    break;
-                case "0":
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
-                    inputHandler.pause();
-                    break;
+            printMenu();
+            String choice = inputProcessor.readLine("Enter your choice: ");
+            if ("0".equals(choice)) {
+                exit = true;
+            } else {
+                iCommand command = commandRegistry.get(choice);
+                if (command != null) {
+                    command.execute();
+                } else {
+                    inputProcessor.print("Invalid choice. Try again.");
+                    pause();
+                }
             }
         }
     }
-
-    private void handleAddGoal() {
-        String desc = inputHandler.readLine("Enter goal description: ");
-        try {
-            controller.addGoal(desc);
-            System.out.println("Goal added.");
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        inputHandler.pause();
-    }
-
-    private void handleChangeGoalStatus() {
-        int goalNumber = inputHandler.readInt("Enter goal number to update (as shown in the list): ");
-        // Adjust for 0-based index.
-        int index = goalNumber - 1;
-        System.out.println("Choose new status:");
-        System.out.println("1. Pending");
-        System.out.println("2. In Progress");
-        System.out.println("3. Done");
-        String statusChoice = inputHandler.readLine("Enter status choice: ");
-        GoalStatus newStatus;
-        switch (statusChoice) {
-            case "1":
-                newStatus = new PendingGoalStatus();
-                break;
-            case "2":
-                newStatus = new InProgressGoalStatus();
-                break;
-            case "3":
-                newStatus = new DoneGoalStatus();
-                break;
-            default:
-                System.out.println("Invalid status choice.");
-                inputHandler.pause();
-                return;
-        }
-        controller.changeGoalStatus(index, newStatus);
-        System.out.println("Goal updated.");
-        inputHandler.pause();
-    }
-
-    private void handleViewGoals() {
-        List<DailyGoal> goals = controller.getTodayGoals();
-        if (goals.isEmpty()) {
-            System.out.println("No goals for today.");
-        } else {
-            // Display table with first column as goal number (1-based).
-            System.out.println("+------+--------------------------------+--------------+");
-            System.out.println("| No.  | Description                    | Status       |");
-            System.out.println("+------+--------------------------------+--------------+");
-            for (int i = 0; i < goals.size(); i++) {
-                DailyGoal goal = goals.get(i);
-                System.out.printf("| %-4d | %-30s | %-12s |%n", i + 1, goal.getDescription(), goal.getStatus().getStatusName());
-            }
-            System.out.println("+------+--------------------------------+--------------+");
-        }
-        inputHandler.pause();
-    }
-
-    private void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+    
+    private void printMenu() {
+        inputProcessor.print("=== " + getTitle() + " ===");
+        inputProcessor.print("1. Add a Goal");
+        inputProcessor.print("2. Change Goal Status");
+        inputProcessor.print("3. View Today's Goals");
+        inputProcessor.print("0. Return to Main Menu");
     }
 
     public static void main(String[] args) {
+        // Initialization code (for demonstration purposes)
         iDataReader dataReader = new txtDataReader();
         iDataWriter dataWriter = new txtDataWriter();
         String filePath = "healthGoals.txt";
-        iGoalRepository goalRepository =
-            new TxtGoalRepository(filePath, dataReader, dataWriter);
+        iGoalRepository goalRepository = new TxtGoalRepository(filePath, dataReader, dataWriter);
         iGoalService goalService = new GoalServiceImpl(goalRepository);
         DailyHealthGoalsController controller = new DailyHealthGoalsController(goalService);
         iFeatureUI dailyHealthGoalsUI = new DailyHealthGoalsUI(controller);

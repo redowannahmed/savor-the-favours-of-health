@@ -3,7 +3,7 @@ package feature.healthGoal;
 import java.util.List;
 
 public class TableRenderer {
-    public void renderGoalsTable(List<DailyGoal> goals) {
+    public static final void renderGoalsTable(List<DailyGoal> goals) {
         System.out.println("+------+--------------------------------+--------------+");
         System.out.println("| No.  | Description                    | Status       |");
         System.out.println("+------+--------------------------------+--------------+");
