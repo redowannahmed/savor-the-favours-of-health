@@ -4,7 +4,7 @@ import UI.InputProcessor;
 import UI.iCommand;
 
 public class LogMoodCommand implements iCommand{
-        private final MoodTrackerController controller;
+    private final MoodTrackerController controller;
     private final InputProcessor inputProcessor;
     
     public LogMoodCommand(MoodTrackerController controller, InputProcessor inputProcessor) {
