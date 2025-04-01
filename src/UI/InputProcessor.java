@@ -3,7 +3,7 @@ package UI;
 import java.util.Scanner;
 
 public class InputProcessor {
-        private final Scanner scanner;
+    private final Scanner scanner;
 
     public InputProcessor() {
         scanner = new Scanner(System.in);

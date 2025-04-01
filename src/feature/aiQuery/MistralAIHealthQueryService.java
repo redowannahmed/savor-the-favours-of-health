@@ -1,7 +1,7 @@
 package feature.aiQuery;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import com.google.gson.JsonObject;
@@ -26,7 +26,8 @@ public class MistralAIHealthQueryService implements iAIHealthQuery{
                 + "\"max_tokens\": 250 }";
         
                 try {
-                    HttpURLConnection conn = (HttpURLConnection) new URL(baseUrl).openConnection();
+                    URI uri = new URI(baseUrl);
+                    HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json");
                     conn.setRequestProperty("Authorization", "Bearer " + apiKey);
