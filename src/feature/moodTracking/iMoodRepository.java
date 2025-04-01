@@ -7,4 +7,5 @@ public interface iMoodRepository {
     List<MoodEntry> getAllEntries();
     void addEntry(MoodEntry entry);
     List<MoodEntry> getEntriesSince(LocalDate startDate);
+    List<MoodEntry> getEntriesForDate(LocalDate date);
 }

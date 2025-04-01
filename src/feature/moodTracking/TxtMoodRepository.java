@@ -60,6 +60,17 @@ public class TxtMoodRepository implements iMoodRepository{
         return result;
     }
 
+    public List<MoodEntry> getEntriesForDate(LocalDate date) {
+        List<MoodEntry> all = getAllEntries();
+        List<MoodEntry> result = new ArrayList<>();
+        for (MoodEntry entry : all) {
+            if (entry.getDate().equals(date)) {
+                result.add(entry);
+            }
+        }
+        return result;
+    }
+
     private void writeAllEntries(List<MoodEntry> entries) {
         StringBuilder sb = new StringBuilder();
         for (MoodEntry entry : entries) {
