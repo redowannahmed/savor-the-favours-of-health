@@ -1,5 +1,6 @@
 package feature.healthGoal;
 
+import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
 
@@ -14,6 +15,7 @@ public class ChangeGoalStatusCommand implements iCommand{
     
     @Override
     public void execute() {
+        ClearScreen.clearScreen();
         System.out.println();
         TableRenderer.renderGoalsTable(controller.getTodayGoals());
         System.out.println();

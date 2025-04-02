@@ -43,7 +43,6 @@ public class TxtSleepDataRepository implements iSleepRepository {
     public void addSession(SleepSession session) {
     List<SleepSession> sessions = getAllSessions();
     
-    // Check for an existing session with the same date.
     for (SleepSession s : sessions) {
         if (s.getDate().equals(session.getDate())) {
             System.out.println("Error: A sleep session for " + session.getDate() + " is already logged.");
@@ -53,7 +52,6 @@ public class TxtSleepDataRepository implements iSleepRepository {
     
     sessions.add(session);
     
-    // Build file content from sessions.
     StringBuilder sb = new StringBuilder();
     for (SleepSession s : sessions) {
             sb.append(s.serialize()).append(System.lineSeparator());

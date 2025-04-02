@@ -43,6 +43,7 @@ public class AIHealthQueryUI extends AbstractFeatureUI{
     }
 
     private void handleQuery() {
+        ClearScreen.clearScreen();
         String userQuery = inputProcessor.readLine("Enter your health-related query: ");
         System.out.println("Fetching response from AI...");
         String aiResponse = aiService.getAIResponse(userQuery);

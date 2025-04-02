@@ -20,13 +20,11 @@ public class SleepSession {
         return sleepHours;
     }
 
-    // Serialize as "date | sleepHours"
     public String serialize() {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         return date.format(formatter) + " | " + sleepHours;
     }
 
-    // Deserialize from a line of text in "date | sleepHours" format.
     public static SleepSession deserialize(String line) {
         String[] parts = line.split("\\s*\\|\\s*");
         if (parts.length != 2) return null;

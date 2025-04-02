@@ -8,7 +8,6 @@ public class SleepAnalyzer implements iSleepAnalyzer {
     
     private final iProgressBarRenderer progressBarRenderer;
 
-    // Inject the progress bar renderer via the constructor.
     public SleepAnalyzer(iProgressBarRenderer progressBarRenderer) {
         this.progressBarRenderer = progressBarRenderer;
     }

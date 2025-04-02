@@ -1,5 +1,6 @@
 package feature.moodTracking;
 
+import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
 
@@ -14,6 +15,7 @@ public class LogMoodCommand implements iCommand{
     
     @Override
     public void execute() {
+        ClearScreen.clearScreen();
         int rating = inputProcessor.readInt("On a scale of 1 to 5, how would you rate today? ");
         if (rating >= 4) {
             inputProcessor.print("Excellent!");
@@ -22,6 +24,7 @@ public class LogMoodCommand implements iCommand{
         } else {
             inputProcessor.print("I'm sorry to hear that!");
         }
+        System.out.println();
         inputProcessor.print("How would you describe your overall feelings for today?");
         inputProcessor.print("1. Happy");
         inputProcessor.print("2. Sad");
@@ -43,6 +46,7 @@ public class LogMoodCommand implements iCommand{
                 mood = new HappyMood();
                 break;
         }
+        System.out.println();
         String notes = inputProcessor.readLine("Any additional notes? (Leave blank if none): ");
         controller.logMoodEntry(rating, mood, notes);
         inputProcessor.print("Mood logged successfully!");

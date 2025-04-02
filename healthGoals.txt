@@ -1,4 +1,5 @@
 2025-04-02 | drink 2 litres of water | In Progress
 2025-04-02 | exercise for 10 minutes | Done
 2025-04-02 | eat cucumbers | Done
-2025-04-02 | code for 90 mins | Pending
+2025-04-02 | code for 90 mins | In Progress
+2025-04-02 | eat 20 veggies | Pending
