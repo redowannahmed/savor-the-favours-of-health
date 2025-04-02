@@ -29,7 +29,6 @@ public class GoalServiceImpl implements iGoalService {
             return;
         }
         DailyGoal goal = todayGoals.get(goalNumber);
-        // Create a new DailyGoal with updated status (preserving description and date).
         DailyGoal updatedGoal = new DailyGoal(goal.getDescription(), goal.getDate(), newStatus);
         goalRepository.updateTodayGoalAtIndex(goalNumber, updatedGoal);
     }

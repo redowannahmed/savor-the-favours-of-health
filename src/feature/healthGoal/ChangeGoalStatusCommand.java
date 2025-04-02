@@ -14,6 +14,9 @@ public class ChangeGoalStatusCommand implements iCommand{
     
     @Override
     public void execute() {
+        System.out.println();
+        TableRenderer.renderGoalsTable(controller.getTodayGoals());
+        System.out.println();
         int goalNumber = inputProcessor.readInt("Enter goal number to update (as shown in the list): ");
         int index = goalNumber - 1; 
         inputProcessor.print("Choose new status:");
@@ -39,6 +42,8 @@ public class ChangeGoalStatusCommand implements iCommand{
         }
         controller.changeGoalStatus(index, newStatus);
         inputProcessor.print("Goal updated.");
+        System.out.println();
+        TableRenderer.renderGoalsTable(controller.getTodayGoals());
         inputProcessor.pause();
     }
 }

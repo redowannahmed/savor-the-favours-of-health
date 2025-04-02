@@ -3,7 +3,7 @@ package feature.healthGoal;
 import java.util.List;
 
 public class DailyHealthGoalsController {
-        private final iGoalService goalService;
+    private final iGoalService goalService;
 
     public DailyHealthGoalsController(iGoalService goalService) {
         this.goalService = goalService;

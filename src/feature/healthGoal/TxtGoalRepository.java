@@ -22,7 +22,7 @@ public class TxtGoalRepository implements iGoalRepository{
     @Override
     public List<DailyGoal> getGoalsForDate(LocalDate date) {
         List<DailyGoal> goals = new ArrayList<>();
-        List<DailyGoal> allGoals = getAllGoals();
+        List<DailyGoal> allGoals = getAllGoals(); 
         for (DailyGoal goal : allGoals) {
             if (goal.getDate().equals(date)) {
                 goals.add(goal);
