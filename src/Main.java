@@ -1,27 +1,23 @@
-import java.util.*;
-
-import UI.iFeatureUI;
 import controller.AppController;
-import feature.aiQuery.iAIHealthQuery;
-import feature.aiQuery.AIHealthQueryUI;
-import feature.aiQuery.MistralAIHealthQueryService;
+import factory.AIHealthQueryFactory;
+import factory.DailyHealthGoalsFactory;
+import factory.FeatureRegistry;
+import factory.MoodTrackingFactory;
+import factory.NutritionTrackerFactory;
+import factory.SleepDataAnalysisFactory;
+
 
 public class Main {
     public static void main(String[] args) {
-
-        // 1. Instantiate the AI feature
-        iAIHealthQuery aiService =
-                new MistralAIHealthQueryService("ethHhWEx4lbnwSQYWjPO1S6ESSl1YvT1",
-                        "https://api.mistral.ai/v1/chat/completions");
-        iFeatureUI aiUI = new AIHealthQueryUI(aiService);
+        FeatureRegistry registry = new FeatureRegistry();
         
-        // 4. Create the main menu with all features
-        AppController app = new AppController(Arrays.asList(
-            aiUI
-            // ... add others ...
-        ));
+        registry.registerFeature("Daily Health Goals", new DailyHealthGoalsFactory());
+        registry.registerFeature("Log sleep information", new SleepDataAnalysisFactory());
+        registry.registerFeature("AI health query", new AIHealthQueryFactory());
+        registry.registerFeature("Daily Mood Logger", new MoodTrackingFactory());
+        registry.registerFeature("Nutrition tracker", new NutritionTrackerFactory());
 
-        // 5. Run!
+        AppController app = new AppController(registry);
         app.run();
     }
 }

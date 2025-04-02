@@ -1,3 +1,4 @@
 2025-03-31 | walk 5 hours | Pending
 2025-04-01 | drink 5 litres of water | Pending
 2025-04-02 | walk for 2 hours | Pending
+2025-04-02 | eat 5 apples today | Pending

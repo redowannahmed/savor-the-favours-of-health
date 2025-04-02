@@ -49,4 +49,10 @@ public class AIHealthQueryUI extends AbstractFeatureUI{
         System.out.println("\n\u001B[36m" + aiResponse + "\u001B[0m"); 
     }
 
+    public static void main(String[] args) {
+        iAIHealthQuery aiHealthQuery = new MistralAIHealthQueryService("ethHhWEx4lbnwSQYWjPO1S6ESSl1YvT1", "https://api.mistral.ai/v1/chat/completions");
+        AIHealthQueryUI aiHealthQueryUI = new AIHealthQueryUI(aiHealthQuery);
+        aiHealthQueryUI.run();
+    }
+
 }

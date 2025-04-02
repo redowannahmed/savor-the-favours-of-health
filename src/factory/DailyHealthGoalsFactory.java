@@ -13,7 +13,7 @@ import utils.iDataWriter;
 import utils.txtDataReader;
 import utils.txtDataWriter;
 
-public class DailyGoalsFactory implements iFeatureFactory{
+public class DailyHealthGoalsFactory implements iFeatureFactory{
         @Override
     public iFeatureUI create() throws FeatureInitializationException {
         try {
