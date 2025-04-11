@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
+import utils.ClearScreen;
 import UI.iCommand;
 
 public class ViewDayMoodCommand implements iCommand{
@@ -19,7 +19,7 @@ public class ViewDayMoodCommand implements iCommand{
 
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         String dateStr = inputProcessor.readLine("Enter date (YYYY-MM-DD): ");
         LocalDate date;
         try {

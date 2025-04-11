@@ -1,8 +1,8 @@
 package feature.sleep;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class LogSleepSessionCommand implements iCommand{
     private final iSleepRepository sleepRepository;
@@ -15,7 +15,7 @@ public class LogSleepSessionCommand implements iCommand{
     
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         String sleepInput = inputProcessor.readLine("How many hours did you sleep? (e.g., 7.5, 8, etc.): ");
         try {
             SleepSession session = SleepSessionFactory.createSession(sleepInput);

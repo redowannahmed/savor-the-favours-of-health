@@ -2,9 +2,9 @@ package feature.healthGoal;
 
 import java.util.List;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class ViewGoalsCommand implements iCommand{
     private final DailyHealthGoalsController controller;
@@ -17,7 +17,7 @@ public class ViewGoalsCommand implements iCommand{
     
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         List<DailyGoal> goals = controller.getTodayGoals();
         if (goals.isEmpty()) {
             inputProcessor.print("No goals for today.");

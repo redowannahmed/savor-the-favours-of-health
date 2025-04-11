@@ -3,9 +3,9 @@ package feature.sleep;
 import java.time.LocalDate;
 import java.util.List;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class ViewSleepAnalysisCommand implements iCommand{
     private final iSleepRepository sleepRepository;
@@ -20,7 +20,7 @@ public class ViewSleepAnalysisCommand implements iCommand{
     
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         LocalDate fourWeeksAgo = LocalDate.now().minusWeeks(4);
         List<SleepSession> sessions = sleepRepository.getSessionsSince(fourWeeksAgo);
         if (sessions.isEmpty()) {

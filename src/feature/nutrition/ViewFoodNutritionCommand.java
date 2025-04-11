@@ -1,10 +1,8 @@
 package feature.nutrition;
 
-import java.lang.ref.Cleaner.Cleanable;
-
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class ViewFoodNutritionCommand implements iCommand{
     private final iNutritionService nutritionService;
@@ -17,7 +15,7 @@ public class ViewFoodNutritionCommand implements iCommand{
     
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         String foodName = inputProcessor.readLine("Enter the name of the food item: ");
         FoodItem item = nutritionService.getFoodNutrition(foodName);
         if (item == null) {

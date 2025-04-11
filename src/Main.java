@@ -6,7 +6,6 @@ import factory.MoodTrackingFactory;
 import factory.NutritionTrackerFactory;
 import factory.SleepDataAnalysisFactory;
 
-
 public class Main {
     public static void main(String[] args) {
         FeatureRegistry registry = new FeatureRegistry();

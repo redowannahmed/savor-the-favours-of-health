@@ -1,8 +1,8 @@
 package feature.moodTracking;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class ViewSummaryCommand implements iCommand{
     private final MoodTrackerController controller;
@@ -15,7 +15,7 @@ public class ViewSummaryCommand implements iCommand{
 
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         MoodSummary summary = controller.getMoodSummary();
         inputProcessor.print("=== Mood Summary for Last 4 Weeks ===");
         if (summary.getAverageRating() == 0) {

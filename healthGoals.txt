@@ -3,3 +3,4 @@
 2025-04-02 | eat cucumbers | Done
 2025-04-02 | code for 90 mins | In Progress
 2025-04-02 | eat 20 veggies | Pending
+2025-04-12 | walk 20 mins | Pending

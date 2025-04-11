@@ -1,8 +1,8 @@
 package feature.healthGoal;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class AddGoalCommand implements iCommand{
     private final DailyHealthGoalsController controller;
@@ -15,7 +15,7 @@ public class AddGoalCommand implements iCommand{
     
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         String desc = inputProcessor.readLine("Enter goal description: ");
         try {
             controller.addGoal(desc);

@@ -1,6 +1,8 @@
 package UI;
 
-public abstract class AbstractFeatureUI extends ClearScreen implements iFeatureUI{
+import utils.ClearScreen;
+
+public abstract class AbstractFeatureUI implements iFeatureUI{
     protected final InputProcessor inputProcessor;
     
     public AbstractFeatureUI() {
@@ -13,5 +15,10 @@ public abstract class AbstractFeatureUI extends ClearScreen implements iFeatureU
      */
     protected void pause() {
         inputProcessor.pause();
+    }
+
+    public void clearScreen ()
+    {
+        ClearScreen.getInstance().clearScreen();
     }
 }

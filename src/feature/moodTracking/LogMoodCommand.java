@@ -1,8 +1,8 @@
 package feature.moodTracking;
 
-import UI.ClearScreen;
 import UI.InputProcessor;
 import UI.iCommand;
+import utils.ClearScreen;
 
 public class LogMoodCommand implements iCommand{
     private final MoodTrackerController controller;
@@ -15,7 +15,7 @@ public class LogMoodCommand implements iCommand{
     
     @Override
     public void execute() {
-        ClearScreen.clearScreen();
+        ClearScreen.getInstance().clearScreen();
         int rating = inputProcessor.readInt("On a scale of 1 to 5, how would you rate today? ");
         if (rating >= 4) {
             inputProcessor.print("Excellent!");
