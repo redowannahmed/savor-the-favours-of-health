@@ -4,10 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import UI.*;
 import colorUtils.ColorUtil;
-import utils.iDataReader;
-import utils.iDataWriter;
-import utils.txtDataReader;
-import utils.txtDataWriter;
 
 
 public class MoodTrackerUI extends AbstractFeatureUI{
@@ -22,7 +18,6 @@ public class MoodTrackerUI extends AbstractFeatureUI{
     }
     
     private void registerCommands() {
-        // The shared inputProcessor and tableRenderer come from AbstractFeatureUI.
         commandRegistry.put("1", new LogMoodCommand(controller, inputProcessor));
         commandRegistry.put("2", new ViewSummaryCommand(controller, inputProcessor));
         commandRegistry.put("3", new ViewDayMoodCommand(controller, inputProcessor));
