@@ -2,6 +2,7 @@ package feature.nutrition;
 
 import UI.InputProcessor;
 import UI.iCommand;
+import colorUtils.ColorUtil;
 import utils.ClearScreen;
 
 public class ViewFoodNutritionCommand implements iCommand{
@@ -16,19 +17,22 @@ public class ViewFoodNutritionCommand implements iCommand{
     @Override
     public void execute() {
         ClearScreen.getInstance().clearScreen();
-        String foodName = inputProcessor.readLine("Enter the name of the food item: ");
+        String foodName = inputProcessor.readLine(ColorUtil.applyNote("Enter the name of the food item: "));
+        System.out.println();
         FoodItem item = nutritionService.getFoodNutrition(foodName);
         if (item == null) {
-            inputProcessor.print("Food item not found in the database.");
+            inputProcessor.print(ColorUtil.applyCaution("Food item not found in the database."));
         } else {
-            inputProcessor.print("Food item found:");
-            inputProcessor.print("Name: " + item.getName());
-            inputProcessor.print("Calories: " + item.getCalories());
-            inputProcessor.print("Protein: " + item.getProtein());
-            inputProcessor.print("Carbs: " + item.getCarbs());
-            inputProcessor.print("Fats: " + item.getFats());
+            inputProcessor.print(ColorUtil.applySuccess("Food item found:"));
+            System.out.println();
+            inputProcessor.print(ColorUtil.applyOption("Name: ") + item.getName());
+            inputProcessor.print(ColorUtil.applyOption("Calories: ") + item.getCalories());
+            inputProcessor.print(ColorUtil.applyOption("Protein: ") + item.getProtein());
+            inputProcessor.print(ColorUtil.applyOption("Carbs: ") + item.getCarbs());
+            inputProcessor.print(ColorUtil.applyOption("Fats: ") + item.getFats());
             if (item.getVitamins() != null && !item.getVitamins().isEmpty()) {
-                inputProcessor.print("Vitamins: " + item.getVitamins());
+                inputProcessor.print(ColorUtil.applyOption("Vitamins: ") + item.getVitamins());
+                System.out.println();
             }
         }
         inputProcessor.pause();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import UI.InputProcessor;
 import UI.iCommand;
+import colorUtils.ColorUtil;
 import utils.ClearScreen;
 
 public class ViewSleepAnalysisCommand implements iCommand{
@@ -24,13 +25,15 @@ public class ViewSleepAnalysisCommand implements iCommand{
         LocalDate fourWeeksAgo = LocalDate.now().minusWeeks(4);
         List<SleepSession> sessions = sleepRepository.getSessionsSince(fourWeeksAgo);
         if (sessions.isEmpty()) {
-            inputProcessor.print("No sleep data available for the past 4 weeks.");
+            inputProcessor.print(ColorUtil.applyError("No sleep data available for the past 4 weeks."));
         } else {
             SleepAnalysisResult result = sleepAnalyzer.analyzeSleepTrend(sessions);
-            inputProcessor.print(String.format("Average sleep duration: %.2f hours", result.getAvgSleepDuration()));
             inputProcessor.print("Progress: " + result.getProgressBar());
+            inputProcessor.print(String.format("Average sleep duration: %.2f hours", result.getAvgSleepDuration()));
             inputProcessor.print("Recommendation: " + result.getRecommendation());
+            System.out.println();
         }
         inputProcessor.pause();
     }
 }
+

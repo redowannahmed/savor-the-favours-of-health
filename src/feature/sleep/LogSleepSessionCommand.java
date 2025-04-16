@@ -2,6 +2,7 @@ package feature.sleep;
 
 import UI.InputProcessor;
 import UI.iCommand;
+import colorUtils.ColorUtil;
 import utils.ClearScreen;
 
 public class LogSleepSessionCommand implements iCommand{
@@ -16,12 +17,12 @@ public class LogSleepSessionCommand implements iCommand{
     @Override
     public void execute() {
         ClearScreen.getInstance().clearScreen();
-        String sleepInput = inputProcessor.readLine("How many hours did you sleep? (e.g., 7.5, 8, etc.): ");
+        String sleepInput = inputProcessor.readLine(ColorUtil.applyNote("How many hours did you sleep? (e.g., 7.5, 8, etc.): "));
         try {
             SleepSession session = SleepSessionFactory.createSession(sleepInput);
             sleepRepository.addSession(session);
         } catch (NumberFormatException e) {
-            inputProcessor.print("Invalid number format. Please enter a valid number.");
+            inputProcessor.print(ColorUtil.applyError("Invalid number format. Please enter a valid number."));
         }
         inputProcessor.pause();
     }

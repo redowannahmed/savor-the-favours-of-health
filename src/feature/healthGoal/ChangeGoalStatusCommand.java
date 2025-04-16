@@ -1,7 +1,9 @@
 package feature.healthGoal;
 
+
 import UI.InputProcessor;
 import UI.iCommand;
+import colorUtils.ColorUtil;
 import utils.ClearScreen;
 
 public class ChangeGoalStatusCommand implements iCommand{
@@ -19,13 +21,17 @@ public class ChangeGoalStatusCommand implements iCommand{
         System.out.println();
         TableRenderer.renderGoalsTable(controller.getTodayGoals());
         System.out.println();
-        int goalNumber = inputProcessor.readInt("Enter goal number to update (as shown in the list): ");
+        int goalNumber = inputProcessor.readInt(ColorUtil.applyNote("Enter goal number to update (as shown in the list): "));
+        System.out.println();
         int index = goalNumber - 1; 
-        inputProcessor.print("Choose new status:");
-        inputProcessor.print("1. Pending");
-        inputProcessor.print("2. In Progress");
-        inputProcessor.print("3. Done");
-        String statusChoice = inputProcessor.readLine("Enter status choice: ");
+        inputProcessor.print(ColorUtil.applyOption("Choose new status:"));
+        inputProcessor.print(ColorUtil.applyOption("1. Pending"));
+        inputProcessor.print(ColorUtil.applyOption("2. In Progress"));
+        inputProcessor.print(ColorUtil.applyOption("3. Done"));
+        System.out.println();
+
+        String statusChoice = inputProcessor.readLine(ColorUtil.applyNote("Enter status choice: "));
+        System.out.println();
         GoalStatus newStatus;
         switch (statusChoice) {
             case "1":
@@ -38,12 +44,13 @@ public class ChangeGoalStatusCommand implements iCommand{
                 newStatus = new DoneGoalStatus();
                 break;
             default:
-                inputProcessor.print("Invalid status choice.");
+                inputProcessor.print(ColorUtil.applyError("Invalid status choice."));
                 inputProcessor.pause();
                 return;
         }
         controller.changeGoalStatus(index, newStatus);
-        inputProcessor.print("Goal updated.");
+        ClearScreen.getInstance().clearScreen();
+        inputProcessor.print(ColorUtil.applySuccess("Goal updated."));
         System.out.println();
         TableRenderer.renderGoalsTable(controller.getTodayGoals());
         inputProcessor.pause();

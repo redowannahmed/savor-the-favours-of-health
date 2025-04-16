@@ -2,6 +2,7 @@ package feature.sleep;
 
 import UI.AbstractFeatureUI;
 import UI.iCommand;
+import colorUtils.ColorUtil;
 import utils.iDataReader;
 import utils.iDataWriter;
 import utils.txtDataReader;
@@ -26,7 +27,6 @@ public class SleepAnalysisUI extends AbstractFeatureUI {
         commandRegistry.put("2", new ViewSleepAnalysisCommand(sleepRepository, sleepAnalyzer, inputProcessor));
     }
     
-    @Override
     public String getTitle() {
         return "Sleep Pattern Analyzer";
     }
@@ -37,7 +37,9 @@ public class SleepAnalysisUI extends AbstractFeatureUI {
         while (!exit) {
             clearScreen();
             printMenu();
-            String choice = inputProcessor.readLine("Enter your choice: ");
+            System.out.println();
+            String choice = inputProcessor.readLine(ColorUtil.applyNote("Enter your choice: "));
+            
             if ("0".equals(choice)) {
                 exit = true;
             } else {
@@ -53,19 +55,11 @@ public class SleepAnalysisUI extends AbstractFeatureUI {
     }
     
     private void printMenu() {
-        inputProcessor.print("=== " + getTitle() + " ===");
-        inputProcessor.print("1. Log your sleep hours");
-        inputProcessor.print("2. View sleep pattern and recommendation");
-        inputProcessor.print("0. Return to Main Menu");
+        inputProcessor.print(ColorUtil.applySubHeader("=== " + getTitle() + " ==="));
+        System.out.println();
+        inputProcessor.print(ColorUtil.applyOption("1. Log your sleep hours"));
+        inputProcessor.print(ColorUtil.applyOption("2. View sleep pattern and recommendation"));
+        inputProcessor.print(ColorUtil.applyOption("0. Return to Main Menu"));
     }
 
-    public static void main(String[] args) {
-        iDataReader dataReader = new txtDataReader();
-        iDataWriter dataWriter = new txtDataWriter();
-        iProgressBarRenderer progressRenderer = new DefaultProgressBarRenderer();
-        iSleepRepository sleepRepository = new TxtSleepDataRepository("sleep.txt", dataReader, dataWriter);
-        iSleepAnalyzer sleepAnalyzer = new SleepAnalyzer(progressRenderer);
-        SleepAnalysisUI sleepUI = new SleepAnalysisUI(sleepRepository, sleepAnalyzer);
-        sleepUI.run();
-    }
 }

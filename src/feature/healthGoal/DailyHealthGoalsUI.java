@@ -4,11 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import UI.iCommand;
-import UI.iFeatureUI;
-import utils.iDataReader;
-import utils.iDataWriter;
-import utils.txtDataReader;
-import utils.txtDataWriter;
+import colorUtils.ColorUtil;
 import UI.AbstractFeatureUI;
 
 public class DailyHealthGoalsUI extends AbstractFeatureUI{
@@ -27,7 +23,6 @@ public class DailyHealthGoalsUI extends AbstractFeatureUI{
         commandRegistry.put("3", new ViewGoalsCommand(controller, inputProcessor));
     }
     
-    @Override
     public String getTitle() {
         return "Daily Health Goals";
     }
@@ -38,7 +33,7 @@ public class DailyHealthGoalsUI extends AbstractFeatureUI{
         while (!exit) {
             clearScreen();
             printMenu();
-            String choice = inputProcessor.readLine("Enter your choice: ");
+            String choice = inputProcessor.readLine(ColorUtil.applyNote("Enter your choice: "));
             if ("0".equals(choice)) {
                 exit = true;
             } else {
@@ -46,7 +41,7 @@ public class DailyHealthGoalsUI extends AbstractFeatureUI{
                 if (command != null) {
                     command.execute();
                 } else {
-                    inputProcessor.print("Invalid choice. Try again.");
+                    inputProcessor.print(ColorUtil.applyError("Invalid choice. Try again."));
                     pause();
                 }
             }
@@ -54,22 +49,10 @@ public class DailyHealthGoalsUI extends AbstractFeatureUI{
     }
     
     private void printMenu() {
-        inputProcessor.print("=== " + getTitle() + " ===");
-        inputProcessor.print("1. Add a Goal");
-        inputProcessor.print("2. Change Goal Status");
-        inputProcessor.print("3. View Today's Goals");
-        inputProcessor.print("0. Return to Main Menu");
-    }
-
-    public static void main(String[] args) {
-        // Initialization code (for demonstration purposes)
-        iDataReader dataReader = new txtDataReader();
-        iDataWriter dataWriter = new txtDataWriter();
-        String filePath = "healthGoals.txt";
-        iGoalRepository goalRepository = new TxtGoalRepository(filePath, dataReader, dataWriter);
-        iGoalService goalService = new GoalServiceImpl(goalRepository);
-        DailyHealthGoalsController controller = new DailyHealthGoalsController(goalService);
-        iFeatureUI dailyHealthGoalsUI = new DailyHealthGoalsUI(controller);
-        dailyHealthGoalsUI.run();
+        inputProcessor.print(ColorUtil.applySubHeader("=== " + getTitle() + " ==="));
+        inputProcessor.print("\n" + ColorUtil.applyOption("1. Add a Goal"));
+        inputProcessor.print(ColorUtil.applyOption("2. Change Goal Status"));
+        inputProcessor.print(ColorUtil.applyOption("3. View Today's Goals"));
+        inputProcessor.print(ColorUtil.applyOption("0. Return to Main Menu") + "\n");
     }
 }

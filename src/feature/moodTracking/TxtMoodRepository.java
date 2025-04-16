@@ -18,7 +18,7 @@ public class TxtMoodRepository implements iMoodRepository{
         this.filePath = filePath;
         this.dataReader = dataReader;
         this.dataWriter = dataWriter;
-        this.serializer = new TxtMoodEntrySerializer(); // You can inject this if needed.
+        this.serializer = new TxtMoodEntrySerializer(); 
     }
 
     @Override

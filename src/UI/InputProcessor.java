@@ -25,6 +25,11 @@ public class InputProcessor {
         }
     }
 
+    public void printInline(String message)
+    {
+        System.out.print(message);
+    }
+
     public void pause() {
         readLine("Press Enter to continue...");
     }

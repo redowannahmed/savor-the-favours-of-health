@@ -2,6 +2,7 @@ package feature.healthGoal;
 
 import UI.InputProcessor;
 import UI.iCommand;
+import colorUtils.ColorUtil;
 import utils.ClearScreen;
 
 public class AddGoalCommand implements iCommand{
@@ -16,11 +17,11 @@ public class AddGoalCommand implements iCommand{
     @Override
     public void execute() {
         ClearScreen.getInstance().clearScreen();
-        String desc = inputProcessor.readLine("Enter goal description: ");
+        String desc = inputProcessor.readLine(ColorUtil.applyNote("Enter goal description: "));
         try {
             controller.addGoal(desc);
             System.out.println();
-            inputProcessor.print("Goal added.");
+            inputProcessor.print(ColorUtil.applySuccess("Goal added."));
         } catch (IllegalArgumentException e) {
             inputProcessor.print(e.getMessage());
         }

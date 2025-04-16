@@ -3,12 +3,9 @@ package feature.nutrition;
 
 import UI.AbstractFeatureUI;
 
-import java.io.IOException;
 import java.util.*;
 import UI.iCommand;
-import UI.iFeatureUI;
-import utils.JsonDataReader;
-import utils.iDataReader;
+import colorUtils.ColorUtil;
 
 public class NutritionTrackerUI extends AbstractFeatureUI{
     private final iNutritionService nutritionService;
@@ -24,7 +21,6 @@ public class NutritionTrackerUI extends AbstractFeatureUI{
         commandRegistry.put("1", new ViewFoodNutritionCommand(nutritionService, inputProcessor));
     }
     
-    @Override
     public String getTitle() {
         return "Nutritional Intake Tracker";
     }
@@ -35,7 +31,7 @@ public class NutritionTrackerUI extends AbstractFeatureUI{
         while (!exit) {
             clearScreen();
             printMenu();
-            String choice = inputProcessor.readLine("Enter your choice: ");
+            String choice = inputProcessor.readLine(ColorUtil.applyNote("Enter your choice: "));
             if ("0".equals(choice)) {
                 exit = true;
             } else {
@@ -43,7 +39,7 @@ public class NutritionTrackerUI extends AbstractFeatureUI{
                 if (command != null) {
                     command.execute();
                 } else {
-                    inputProcessor.print("Invalid choice. Try again.");
+                    inputProcessor.print(ColorUtil.applyError("Invalid choice. Try again."));
                     pause();
                 }
             }
@@ -51,22 +47,10 @@ public class NutritionTrackerUI extends AbstractFeatureUI{
     }
     
     private void printMenu() {
-        inputProcessor.print("=== " + getTitle() + " ===");
+        inputProcessor.print(ColorUtil.applySubHeader("=== " + getTitle() + " ==="));
+        System.out.println();
         inputProcessor.print("1. View Food Nutritional Information");
         inputProcessor.print("0. Return to Main Menu");
-    }
-
-    public static void main(String[] args) {
-        iDataReader dataReader = new JsonDataReader();
-        String filePath = "nutrition.json";
-        try {
-            iNutritionRepository nutritionRepository = new JSONNutritionRepository(filePath, dataReader);
-            iNutritionService nutritionService = new NutritionServiceImpl(nutritionRepository);
-            iFeatureUI nutritionUI = new NutritionTrackerUI(nutritionService);
-            nutritionUI.run();
-        } catch (IOException e) {
-            System.out.println("Error loading nutrition data: " + e.getMessage());
-            e.printStackTrace();
-        }
+        System.out.println();
     }
 }

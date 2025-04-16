@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import colorUtils.ColorUtil;
+
 public class TxtSleepDataRepository implements iSleepRepository {
 
     private final String filePath;
@@ -59,7 +61,8 @@ public class TxtSleepDataRepository implements iSleepRepository {
         
         try {
             dataWriter.writeAll(filePath, sb.toString());
-            System.out.println("Sleep session logged successfully for " + session.getDate());
+            System.out.println(ColorUtil.applySuccess("Sleep session logged successfully for " + session.getDate()));
+            System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
         }

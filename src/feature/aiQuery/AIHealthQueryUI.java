@@ -1,6 +1,7 @@
 package feature.aiQuery;
 
 import UI.*;
+import colorUtils.ColorUtil;
 
 public class AIHealthQueryUI extends AbstractFeatureUI{
     private final iAIHealthQuery aiService;
@@ -19,11 +20,14 @@ public class AIHealthQueryUI extends AbstractFeatureUI{
         boolean inFeature = true;
         while (inFeature) {
             clearScreen();
-            System.out.println("=== " + getTitle() + " ===");
-            System.out.println("1. Enter a health query");
-            System.out.println("0. Return to Main Menu");
-            
-            String choice = inputProcessor.readLine("Choose an option: ");
+            System.out.println(ColorUtil.applyHeader("=== " + getTitle() + " ==="));
+            System.out.println();
+
+            System.out.println(ColorUtil.applyOption("1. Enter a health query"));
+            System.out.println(ColorUtil.applyOption("0. Return to Main Menu"));
+            System.out.println();
+
+            String choice = inputProcessor.readLine(ColorUtil.applyNote("Choose an option: "));
             
             switch (choice) {
                 case "1":
@@ -33,7 +37,7 @@ public class AIHealthQueryUI extends AbstractFeatureUI{
                     inFeature = false; // exit this feature
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ColorUtil.applyError("Invalid choice. Please try again."));
             }
             
             if (inFeature) {
@@ -44,16 +48,12 @@ public class AIHealthQueryUI extends AbstractFeatureUI{
 
     private void handleQuery() {
         clearScreen();
-        String userQuery = inputProcessor.readLine("Enter your health-related query: ");
-        System.out.println("Fetching response from AI...");
+        String userQuery = inputProcessor.readLine(ColorUtil.applyOption("Enter your health-related query: "));
+        System.out.println();
+        System.out.println(ColorUtil.applyHighlight("Fetching response from AI..."));
+        System.out.println();
+        
         String aiResponse = aiService.getAIResponse(userQuery);
-        System.out.println("\n\u001B[36m" + aiResponse + "\u001B[0m"); 
+        System.out.println(ColorUtil.applyNote(aiResponse)); 
     }
-
-    public static void main(String[] args) {
-        iAIHealthQuery aiHealthQuery = new MistralAIHealthQueryService("ethHhWEx4lbnwSQYWjPO1S6ESSl1YvT1", "https://api.mistral.ai/v1/chat/completions");
-        AIHealthQueryUI aiHealthQueryUI = new AIHealthQueryUI(aiHealthQuery);
-        aiHealthQueryUI.run();
-    }
-
 }

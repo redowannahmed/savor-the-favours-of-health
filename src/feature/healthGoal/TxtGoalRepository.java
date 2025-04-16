@@ -34,7 +34,6 @@ public class TxtGoalRepository implements iGoalRepository{
     @Override
     public void addGoal(DailyGoal goal) {
         List<DailyGoal> goals = getAllGoals();
-        // Prevent duplicate goal (same description for the same date, ignoring whitespace).
         for (DailyGoal g : goals) {
             if (g.getDate().equals(goal.getDate()) &&
                 g.getDescription().trim().equalsIgnoreCase(goal.getDescription().trim())) {
@@ -48,7 +47,6 @@ public class TxtGoalRepository implements iGoalRepository{
 
     @Override
     public void updateTodayGoalAtIndex(int index, DailyGoal updatedGoal) {
-        // Load all goals, update the specific goal among today's goals.
         List<DailyGoal> allGoals = getAllGoals();
         List<Integer> todayIndices = new ArrayList<>();
         LocalDate today = LocalDate.now();

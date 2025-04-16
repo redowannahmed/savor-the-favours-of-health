@@ -13,7 +13,6 @@ public class AIHealthQueryFactory implements iFeatureFactory{
         try
         {
             iAIHealthQuery aiHealthQuery = new MistralAIHealthQueryService("ethHhWEx4lbnwSQYWjPO1S6ESSl1YvT1", "https://api.mistral.ai/v1/chat/completions");
-            // AIHealthQueryUI aiHealthQueryUI = new AIHealthQueryUI(aiHealthQuery);
             return new AIHealthQueryUI(aiHealthQuery);
         }
         catch (Exception e)

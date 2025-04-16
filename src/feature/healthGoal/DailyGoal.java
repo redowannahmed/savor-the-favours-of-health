@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DailyGoal {
     private String description;
-    private LocalDate date;  // Date for which the goal is set (typically today).
+    private LocalDate date;  
     private GoalStatus status;
 
     public DailyGoal(String description, LocalDate date, GoalStatus status) {
@@ -36,7 +36,6 @@ public class DailyGoal {
         return date.format(formatter) + " | " + description + " | " + status.getStatusName();
     }
 
-    // Deserialize from a line of text.
     public static DailyGoal deserialize(String line) {
         String[] parts = line.split("\\s*\\|\\s*");
         if (parts.length != 3) return null;

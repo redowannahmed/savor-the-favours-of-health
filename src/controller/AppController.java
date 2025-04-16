@@ -3,6 +3,7 @@ import java.util.Map;
 
 import UI.AbstractFeatureUI;
 import UI.iFeatureUI;
+import colorUtils.ColorUtil;
 import exceptions.FeatureInitializationException;
 import factory.FeatureRegistry;
 import factory.iFeatureFactory;
@@ -16,31 +17,35 @@ public class AppController extends AbstractFeatureUI{
         this.featureRegistry = featureRegistry;
     }
 
-    @Override
     public String getTitle() {
-        return "Health Tracker Application";
+        return "Savor the favours of health";
     }
 
     @Override
     public void run() {
         while (isRunning) {
             displayMainMenu();
-            String choice = inputProcessor.readLine("Choose an option: ");
+            System.out.println();
+            String choice = inputProcessor.readLine(ColorUtil.applyNote("Choose an option: "));
             handleMainMenuChoice(choice);
         }
     }
 
     private void displayMainMenu() {
         clearScreen();
-        inputProcessor.print("=== " + getTitle() + " ===");
-        
+        inputProcessor.print(ColorUtil.applyHeader("=== " + getTitle() + " ==="));
+        System.out.println();
+
         int index = 1;
         Map<String, iFeatureFactory> features = featureRegistry.getAvailableFeatures();
         for (String featureName : features.keySet()) {
-            inputProcessor.print(index + ". " + featureName);
+            String optionText = String.format("%2d. %s", index, featureName);
+            inputProcessor.print(ColorUtil.applyOption(optionText));
             index++;
         }
-        inputProcessor.print("0. Exit Application");
+        
+        inputProcessor.print("\n" + ColorUtil.applyOption(" 0. Exit Application"));
+        
     }
 
     private void handleMainMenuChoice(String choice) {
@@ -57,11 +62,11 @@ public class AppController extends AbstractFeatureUI{
                 String featureName = (String) features.keySet().toArray()[choiceIndex];
                 launchFeature(featureName);
             } else {
-                inputProcessor.print("Invalid choice. Please try again.");
+                inputProcessor.print(ColorUtil.applyError("Invalid choice. Please try again."));
                 pause();
             }
         } catch (NumberFormatException e) {
-            inputProcessor.print("Please enter a valid number.");
+            inputProcessor.print(ColorUtil.applyCaution("Please enter a valid number."));
             pause();
         } catch (FeatureInitializationException e) {
             inputProcessor.print("Error: " + e.getMessage());

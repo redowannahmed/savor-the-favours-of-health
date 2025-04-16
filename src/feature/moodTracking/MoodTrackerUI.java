@@ -3,6 +3,7 @@ package feature.moodTracking;
 import java.util.HashMap;
 import java.util.Map;
 import UI.*;
+import colorUtils.ColorUtil;
 import utils.iDataReader;
 import utils.iDataWriter;
 import utils.txtDataReader;
@@ -27,7 +28,6 @@ public class MoodTrackerUI extends AbstractFeatureUI{
         commandRegistry.put("3", new ViewDayMoodCommand(controller, inputProcessor));
     }
     
-    @Override
     public String getTitle() {
         return "Mood Tracker";
     }
@@ -38,7 +38,7 @@ public class MoodTrackerUI extends AbstractFeatureUI{
         while (!exit) {
             clearScreen();
             printMenu();
-            String choice = inputProcessor.readLine("Enter your choice: ");
+            String choice = inputProcessor.readLine(ColorUtil.applyNote("Enter your choice: "));
             if ("0".equals(choice)) {
                 exit = true;
             } else {
@@ -46,7 +46,7 @@ public class MoodTrackerUI extends AbstractFeatureUI{
                 if (command != null) {
                     command.execute();
                 } else {
-                    inputProcessor.print("Invalid choice. Try again.");
+                    inputProcessor.print(ColorUtil.applyError("Invalid choice. Try again."));
                     pause();
                 }
             }
@@ -54,22 +54,14 @@ public class MoodTrackerUI extends AbstractFeatureUI{
     }
     
     private void printMenu() {
-        inputProcessor.print("=== Mood Tracker ===");
-        inputProcessor.print("1. Log your mood for today");
-        inputProcessor.print("2. View mood summary for the last 4 weeks");
-        inputProcessor.print("3. View mood entries for a specific day");
-        inputProcessor.print("0. Return to Main Menu");
-    }
+        inputProcessor.print(ColorUtil.applySubHeader("=== Mood Tracker ==="));
+        System.out.println();
+        inputProcessor.print(ColorUtil.applyOption("1. Log your mood for today"));
+        inputProcessor.print(ColorUtil.applyOption("2. View mood summary for the last 4 weeks"));
+        inputProcessor.print(ColorUtil.applyOption("3. View mood entries for a specific day"));
+        inputProcessor.print(ColorUtil.applyOption("0. Return to Main Menu"));
 
-    public static void main(String[] args) {
-        iDataReader dataReader = new txtDataReader();
-        iDataWriter dataWriter = new txtDataWriter();
-        String filePath = "moodtracker.txt";
-        iMoodRepository moodRepository = new TxtMoodRepository(filePath, dataReader, dataWriter);
-        iMoodService moodService = new MoodServiceImpl(moodRepository);
-        MoodTrackerController controller = new MoodTrackerController(moodService);
-        iFeatureUI moodUI = new MoodTrackerUI(controller);
-        moodUI.run();
+        System.out.println();
     }
 
 }

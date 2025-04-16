@@ -13,7 +13,6 @@ public class txtDataReader implements iDataReader {
         if (!Files.exists(path) || Files.size(path) == 0) {
             return null;
         }
-        // Read entire file as a String.
         String content = Files.readString(path, StandardCharsets.UTF_8);
         if (typeOfT.equals(String.class)) {
             return (T) content;
